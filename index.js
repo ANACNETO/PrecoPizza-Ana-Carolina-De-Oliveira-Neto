@@ -1,33 +1,82 @@
 let pizzas = []; // Array de pizzas adicionadas
 
+// Função para verificar qual radio foi marcado e disponibilizar o formulário correto
+document.addEventListener("DOMContentLoaded", function() {
+    const formRedonda = document.getElementById("formRedonda");
+    const formQuadrada = document.getElementById("formQuadrada");
+    
+    const radioRedonda = document.getElementById("pizzaRedonda");
+    const radioQuadrada = document.getElementById("pizzaQuadrada");
+    // Evento que fica escutando qual radio está sendo selecionado. Quando um é selecionado o outro é escondido e a formatação do formulário é passada junto.
+    radioRedonda.addEventListener("change", function() {
+        if (radioRedonda.checked) {
+            formRedonda.style.display = "block";
+            formRedonda.style.marginTop = "20px";
+            formRedonda.style.display = "flex";
+            formRedonda.style.flexDirection = "column";
+            formRedonda.style.justifyContent = "center";
+            formRedonda.style.alignItems = "center";
+            
+            formQuadrada.style.display = "none";
+        }
+    });
+    
+    radioQuadrada.addEventListener("change", function() {
+        if (radioQuadrada.checked) {
+            formQuadrada.style.display = "block";
+            formQuadrada.style.marginTop = "20px";
+            formQuadrada.style.display = "flex";
+            formQuadrada.style.flexDirection = "column";
+            formQuadrada.style.justifyContent = "center";
+            formQuadrada.style.alignItems = "center";
+            
+            formRedonda.style.display = "none";
+        }
+    });
+});
+// função para salvar as pizzas adicionadas
 function salvarPizzas(event) {
-    event.preventDefault();     // previne a execução padrão de um formulário, de submeter os dados para outra página
+    event.preventDefault();
 
-    // Obtem os valores dos inputs
-    let nome = document.getElementById("nome").value;                           
-    let tamanho = parseFloat(document.getElementById("tamanho").value);
-    let preco = parseFloat(document.getElementById("preco").value);
-    // Já cria um atributo do pedaço por preço da pizza e efetua o cálculo de quantos cm^2 por real de pizza de cada pizza
-    let pedacoPorPreco = (3.14 * (tamanho / 2) * (tamanho / 2)) / preco;
-    // Cria um objeto para armazenar os atributos de cada pizza
-    let novaPizza = {
+    let nome = '';
+    let preco = 0;
+    let tamanho = 0;
+    let pedacoPorPreco = 0;
+
+    const tipoPizzaSelecionada = document.querySelector('input[name="tipoPizza"]:checked').value;
+    // É feita a verificação de qual tipo de pizza está sendo passada e feitas as modificações necessárias nos campos
+    if (tipoPizzaSelecionada === "redonda") {
+        nome = document.getElementById("formRedonda").querySelector("#nome").value;
+        preco = parseFloat(document.getElementById("formRedonda").querySelector("#preco").value);
+        tamanho = parseFloat(document.getElementById("formRedonda").querySelector("#tamanho").value);
+        pedacoPorPreco = (3.14 * (tamanho / 2) * (tamanho / 2)) / preco;
+    } else if (tipoPizzaSelecionada === "quadrada") {
+        nome = document.getElementById("formQuadrada").querySelector("#nome").value;
+        preco = parseFloat(document.getElementById("formQuadrada").querySelector("#preco").value);
+        const altura = parseFloat(document.getElementById("formQuadrada").querySelector("#altura").value);
+        const comprimento = parseFloat(document.getElementById("formQuadrada").querySelector("#comprimento").value);
+        tamanho = `${altura}x${comprimento}`;
+        pedacoPorPreco = (altura*comprimento) / preco;
+    }
+    // Objeto pizza criado com os atributos passados pelo formulário
+    const novaPizza = {
         nome: nome,
         tamanho: tamanho,
         preco: preco,
         pedacoPorPreco: pedacoPorPreco,
     };
-    // Adiciona a pizza ao array de pizzas
+    // Adicionando a pizza ao array de pizzas
     pizzas.push(novaPizza);
-    // Limpa os campos do formulário
-    document.getElementById("nome").value = "";
-    document.getElementById("tamanho").value = "";
-    document.getElementById("preco").value = "";
 
-    // Mostra a tabela no html se o array não for vazio
+    // Limpar campos dos formulários
+    document.querySelectorAll('input[type="text"], input[type="number"]').forEach(input => {
+        input.value = '';
+    });
+
     if (pizzas.length !== 0) {
         document.querySelector('.container').style.display = 'block';
     }
-    // Chama as outra funções quando o form é submetido
+
     ordernarPizzas();
     atualizarTabela();
 }
@@ -76,6 +125,16 @@ function atualizarTabela() {
         }
     });
 }
+// Função para limpar a tabela/ array de pizzas
+function limparTabela() {
+    pizzas = [];
+    document.querySelector('.container').style.display = 'none'; 
+    atualizarTabela();
+}
+
 // Aqui é adicionado um evento para escutar o botão input "submit" e quando o botão for apertado a função salvarPizzas é chamada e desencadeia todo o processo
-let form = document.querySelector("form");
-form.addEventListener("submit", salvarPizzas);
+const formRedonda = document.getElementById("formRedonda");
+formRedonda.addEventListener("submit", salvarPizzas);
+
+const formQuadrada = document.getElementById("formQuadrada");
+formQuadrada.addEventListener("submit", salvarPizzas);

@@ -1,37 +1,81 @@
+*{
+  font-family: 'Montserrat', sans-serif;
+  margin: 7;
+}
+
+header{
+  color: #ff1822;
+}
+
 body{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 main{
   display: flex;
+}
+
+.container-content{
+  display: flex;
+  background-color: #fec82c;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 }
-form{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+input[type='text']{
+    margin-top: 3px;
+    max-width: 100%;
 }
-input{
-    margin-top: 5px;
-    width: 100%;
+
+label{
+  background-color: #fec82c;
+  color: #ff1822;
+  margin-top: 5px;
 }
+
 /*Retira as setas de dentro do input number*/
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  margin: 0;
 }
+
 table, th, td {
-  border:1px solid black;
+  color: #ff1822;
+  border:1px solid #fec82c;
   width: 500px;
 }
+
+.container, h2{
+  color: #ff1822;
+}
+
 .container{
   margin-top: 20px;
   text-align: center;
   display: none;
+}
+
+.container-radio{
+  background-color: #fec82c;
+  color: #ff1822;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+#formRedonda, #formQuadrada{
+  background-color: #fec82c;
+  display: none;
+  align-items: center;
+  align-content: center;
+}
+
+.container-botoes{
+  background-color: #fec82c;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }

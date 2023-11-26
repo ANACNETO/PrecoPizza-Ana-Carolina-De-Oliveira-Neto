@@ -1,43 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custo Benefício de Pizzas V1</title>
+    <title>Custo Benefício de Pizzas - Comparizza </title>
+    <link rel="shortcut icon" href="./assets/favicon-comparizza.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="./index.js" defer></script>
 </head>
+
 <body>
     <header>
         <h1>
-            Custo Benefício de Pizzas
+            Comparizza
         </h1>
+        <p>Descubra o prazer de economizar enquanto saboreia! Faça a escolha inteligente e compare os preços das suas pizzas favoritas conosco. Sua carteira agradece, e seu paladar também!</p>
     </header>
     <main>
-        <form>
-            <label for="nome">Nome da pizza</label>
-            <input type="text" name="nome" id="nome" required>
-            <label for="tamanho">Tamanho da pizza (diâmetro em cm)</label>
-            <input type="number" name="tamanho" id="tamanho" required>
-            <label for="preco">Preço</label>
-            <input type="number" name="preco" id="preco" required>
-            <input type="submit" value="Adicionar Pizza">
-        </form>
-
-        <div class="container">
-            <h2>Tabela de Custo Benefício</h2>
-            <table id="tabelaPizzas">
-                <tr>
-                    <th>Nome</th>
-                    <th>Tam.(cm)</th>
-                    <th>Preço</th>
-                    <th>R$ p/cm<sup>2</sup></th>
-                    <th>Diferença %</th>
-                </tr>
-            </table>
+        <div class="img-aside" >
+            <img src="./assets/pizzeria.jpg" alt="" height=700px>
         </div>
+        <div class="container-content">
 
+            <div class="container-radio">
+                <label for="pizzaRedonda">Pizza Redonda</label>
+                <input type="radio" id="pizzaRedonda" name="tipoPizza" value="redonda">
+
+                <label for="pizzaQuadrada">Pizza Quadrada/Retangular</label>
+                <input type="radio" id="pizzaQuadrada" name="tipoPizza" value="quadrada">
+            </div>
+
+            <form id="formRedonda">
+                <label for="nome">Nome da pizza</label>
+                <input type="text" name="nome" id="nome" required>
+                <label for="tamanho">Tamanho da pizza (diâmetro em cm)</label>
+                <input type="number" name="tamanho" id="tamanho" required>
+                <label for="preco">Preço</label>
+                <input type="number" name="preco" id="preco" required>
+                <div class="container-botoes">
+                    <input type="submit" value="Adicionar Pizza">
+                    <button onclick="limparTabela()">Limpar</button>
+                </div>
+            </form>
+            <form id="formQuadrada">
+                <label for="nome">Nome da pizza</label>
+                <input type="text" name="nome" id="nome" required>
+                <label for="comprimento">Comprimento da pizza (cm)</label>
+                <input type="number" name="comprimento" id="comprimento" required>
+                <label for="altura">Altura da pizza (cm)</label>
+                <input type="number" name="altura" id="altura" required>
+                <label for="preco">Preço</label>
+                <input type="number" name="preco" id="preco" required>
+                <div class="container-botoes">
+                    <input type="submit" value="Adicionar Pizza">
+                    <button onclick="limparTabela()">Limpar</button>
+                </div>
+            </form>
+
+            <div class="container">
+                <h2>Tabela de Custo Benefício</h2>
+                <table id="tabelaPizzas">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tam.(cm)</th>
+                        <th>Preço</th>
+                        <th>R$ p/cm<sup>2</sup></th>
+                        <th>Diferença %</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </main>
 
 </body>
+
 </html>
